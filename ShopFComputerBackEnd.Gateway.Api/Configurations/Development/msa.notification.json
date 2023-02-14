@@ -1,0 +1,48 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "msa-notification",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/msa-notification/api/{everything}",
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "DelegatingHandlers": [
+        "HostInjectorDelegatingHandler"
+      ],
+      "SwaggerKey": "notification"
+    },
+    {
+      "DownstreamPathTemplate": "/odata/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "msa-notification",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/msa-notification/odata/{everything}",
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "DelegatingHandlers": [
+        "HostInjectorDelegatingHandler"
+      ],
+      "SwaggerKey": "notification"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "notification",
+      "Config": [
+        {
+          "Name": "Notification Service",
+          "Version": "v1",
+          "Url": "http://msa-notification/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}

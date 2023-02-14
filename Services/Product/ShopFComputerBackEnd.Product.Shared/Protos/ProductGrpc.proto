@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+option csharp_namespace = "ShopFComputerBackEnd.Product.Grpc.Protos";
+
+package ProductPackage;
+import "google/protobuf/wrappers.proto";
+
+service ProductGrpcService{
+	rpc GetProductVariantByIds (GetProductVariantByIdsGrpcQuery) returns (ProductVariantsGrpcDto);
+	rpc GetProductVariantById (GetProductVariantByIdGrpcQuery) returns (ProductVariantGrpcDto);
+}
+
+message GetProductVariantByIdsGrpcQuery{
+	repeated string Ids = 1;
+}
+
+message GetProductVariantByIdGrpcQuery{
+	repeated string Id = 1;
+}
+
+message ProductVariantsGrpcDto{
+	repeated ProductVariantGrpcDto Value = 1;
+}
+
+message ProductVariantGrpcDto{
+	google.protobuf.StringValue Id = 1;
+	google.protobuf.StringValue Name = 2;
+	google.protobuf.StringValue Category = 3;
+	google.protobuf.StringValue Brand = 4;
+	google.protobuf.StringValue SkuId = 5;
+	google.protobuf.Int64Value Price = 6;
+	google.protobuf.StringValue Images = 7;
+	google.protobuf.StringValue OptionValues = 8;
+	google.protobuf.StringValue ProductId = 9;
+}
+
+message Images {
+	google.protobuf.StringValue Url = 1;
+}

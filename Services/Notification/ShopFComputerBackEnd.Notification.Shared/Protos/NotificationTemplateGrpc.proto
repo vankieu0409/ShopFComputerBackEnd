@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package NotificationPackage;
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/any.proto";
+
+option csharp_namespace = "ShopFComputerBackEnd.Notification.Api";
+
+service NotificationTemplateGrpcService{
+	rpc SendNotification (NotificationGrpcRequest) returns (NotificationGrpcDto);
+}
+
+message VariableGrpcDto{
+	string Variable = 1;
+	string Value = 2;
+}
+
+
+enum NotificationGrpcType{
+	sms = 0;
+	email = 1;
+	mobile = 2;
+}
+
+message NotificationGrpcRequest{
+	string Context = 1;
+	string Name = 2;
+	repeated VariableGrpcDto Variables = 3;
+	string LanguageCode = 4;
+	NotificationGrpcType Type = 5;
+}
+
+message NotificationRespone{
+	string respone = 1;
+}
+
+message NotificationGrpcDto{
+	string Id = 1;
+	string Context = 2;
+	string Name = 3;
+	string Type = 4;
+	bool IsDeleted = 5;
+}

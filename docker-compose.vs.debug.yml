@@ -1,0 +1,151 @@
+version: '3.9'
+
+services:
+  shopfcomputerbackend.gateway.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - Jwt__ValidAudience=${JWT_VALIDAUDIENCE}
+      - Jwt__ValidIssuer=${JWT_VALIDISSUER}
+      - Jwt__Secret=${JWT_SECRET}
+      - Jwt__AccessTokenExpiresInHours=${JWT_ACCESSTOKENEXPIRESINHOURS}
+      - Jwt__RefreshTokenExpiresInHours=${JWT_REFRESHTOKENEXPIRESINHOURS}
+
+  shopfcomputerbackend.identity.api:
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      - ConnectionStrings__Default=Server=${DATABASE_SERVER};Port=${DATABASE_PORT};User Id=${DATABASE_USER};Password=${DATABASE_PASSWORD};Database=ShopFComputerBackEnd.Identity.Dev;
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - Jwt__ValidAudience=${JWT_VALIDAUDIENCE}
+      - Jwt__ValidIssuer=${JWT_VALIDISSUER}
+      - Jwt__Secret=${JWT_SECRET}
+      - Jwt__AccessTokenExpiresInHours=${JWT_ACCESSTOKENEXPIRESINHOURS}
+      - Jwt__RefreshTokenExpiresInHours=${JWT_REFRESHTOKENEXPIRESINHOURS}
+      - DistributedCache__Instance=${DISTRIBUTEDCACHE_INSTANCE}
+      - DistributedCache__Configuration=${DISTRIBUTEDCACHE_SERVER}:${DISTRIBUTEDCACHE_PORT},password=${DISTRIBUTEDCACHE_PASSWORD}
+      - EventStore__Provider=${EVENTSTORE_PROVIDER}
+      - EventStore__ConnectionString=esdb://${EVENTSTORE_USER}:${EVENTSTORE_PASSWORD}@${EVENTSTORE_SERVER}:${EVENTSTORE_PORT}?tls=false&TlsVerifyCert=false
+      - EventBus__Provider=${EVENTBUS_PROVIDER}
+      - EventBus__ConnectionString=amqp://${EVENTBUS_USER}:${EVENTBUS_PASSWORD}@${EVENTBUS_SERVER}:${EVENTBUS_PORT}/
+      - DefaultRoles=Administrators;Users
+      - Services__Notification__Endpoint=https://msa-notification
+      - Services__Notification__Http2UnencryptedSupport=true
+      - Services__Notification__DangerousAcceptAnyServerCertificateValidator=true
+      - Services__Profile__Endpoint=https://msa-profile
+      - Services__Profile__Http2UnencryptedSupport=true
+      - Services__Profile__DangerousAcceptAnyServerCertificateValidator=true
+
+  shopfcomputerbackend.profile.api:
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      - ConnectionStrings__Default=Server=${DATABASE_SERVER};Port=${DATABASE_PORT};User Id=${DATABASE_USER};Password=${DATABASE_PASSWORD};Database=ShopFComputerBackEnd.Profile.Dev;
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - Jwt__ValidAudience=${JWT_VALIDAUDIENCE}
+      - Jwt__ValidIssuer=${JWT_VALIDISSUER}
+      - Jwt__Secret=${JWT_SECRET}
+      - Jwt__AccessTokenExpiresInHours=${JWT_ACCESSTOKENEXPIRESINHOURS}
+      - Jwt__RefreshTokenExpiresInHours=${JWT_REFRESHTOKENEXPIRESINHOURS}
+      - DistributedCache__Instance=${DISTRIBUTEDCACHE_INSTANCE}
+      - DistributedCache__Configuration=${DISTRIBUTEDCACHE_SERVER}:${DISTRIBUTEDCACHE_PORT},password=${DISTRIBUTEDCACHE_PASSWORD}
+      - EventStore__Provider=${EVENTSTORE_PROVIDER}
+      - EventStore__ConnectionString=esdb://${EVENTSTORE_USER}:${EVENTSTORE_PASSWORD}@${EVENTSTORE_SERVER}:${EVENTSTORE_PORT}?tls=false&TlsVerifyCert=false
+      - EventBus__Provider=${EVENTBUS_PROVIDER}
+      - EventBus__ConnectionString=amqp://${EVENTBUS_USER}:${EVENTBUS_PASSWORD}@${EVENTBUS_SERVER}:${EVENTBUS_PORT}/
+      - Services__Identity__Endpoint=https://msa-identity
+      - Services__Identity__Http2UnencryptedSupport=true
+      - Services__Identity__DangerousAcceptAnyServerCertificateValidator=true
+
+  shopfcomputerbackend.notification.api:
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      - ConnectionStrings__Default=Server=${DATABASE_SERVER};Port=${DATABASE_PORT};User Id=${DATABASE_USER};Password=${DATABASE_PASSWORD};Database=ShopFComputerBackEnd.Notification.Dev;
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - Jwt__ValidAudience=${JWT_VALIDAUDIENCE}
+      - Jwt__ValidIssuer=${JWT_VALIDISSUER}
+      - Jwt__Secret=${JWT_SECRET}
+      - Jwt__AccessTokenExpiresInHours=${JWT_ACCESSTOKENEXPIRESINHOURS}
+      - Jwt__RefreshTokenExpiresInHours=${JWT_REFRESHTOKENEXPIRESINHOURS}
+      - DistributedCache__Instance=${DISTRIBUTEDCACHE_INSTANCE}
+      - DistributedCache__Configuration=${DISTRIBUTEDCACHE_SERVER}:${DISTRIBUTEDCACHE_PORT},password=${DISTRIBUTEDCACHE_PASSWORD}
+      - EventStore__Provider=${EVENTSTORE_PROVIDER}
+      - EventStore__ConnectionString=esdb://${EVENTSTORE_USER}:${EVENTSTORE_PASSWORD}@${EVENTSTORE_SERVER}:${EVENTSTORE_PORT}?tls=false&TlsVerifyCert=false
+      - EventBus__Provider=${EVENTBUS_PROVIDER}
+      - EventBus__ConnectionString=amqp://${EVENTBUS_USER}:${EVENTBUS_PASSWORD}@${EVENTBUS_SERVER}:${EVENTBUS_PORT}/
+      - SmsOtp__ApiKey=B88035C2AD72F3A3B2EA4EB307D361
+      - SmsOtp__SecretKey=E08C5D5F9C5CACDC12143350EC09B0
+      - SmsOtp__BrandName=baotrixemay
+      - Services__Identity__Endpoint=https://msa-identity
+      - Services__Identity__Http2UnencryptedSupport=true
+      - Services__Identity__DangerousAcceptAnyServerCertificateValidator=true
+      - Services__Profile__Endpoint=https://msa-profile
+      - Services__Profile__Http2UnencryptedSupport=true
+      - Services__Profile__DangerousAcceptAnyServerCertificateValidator=true
+
+  shopfcomputerbackend.product.api:
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      - ConnectionStrings__Default=Server=${DATABASE_SERVER};Port=${DATABASE_PORT};User Id=${DATABASE_USER};Password=${DATABASE_PASSWORD};Database=ShopFComputerBackEnd.Product.Dev;
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - Jwt__ValidAudience=${JWT_VALIDAUDIENCE}
+      - Jwt__ValidIssuer=${JWT_VALIDISSUER}
+      - Jwt__Secret=${JWT_SECRET}
+      - Jwt__AccessTokenExpiresInHours=${JWT_ACCESSTOKENEXPIRESINHOURS}
+      - Jwt__RefreshTokenExpiresInHours=${JWT_REFRESHTOKENEXPIRESINHOURS}
+      - DistributedCache__Instance=${DISTRIBUTEDCACHE_INSTANCE}
+      - DistributedCache__Configuration=${DISTRIBUTEDCACHE_SERVER}:${DISTRIBUTEDCACHE_PORT},password=${DISTRIBUTEDCACHE_PASSWORD}
+      - EventStore__Provider=${EVENTSTORE_PROVIDER}
+      - EventStore__ConnectionString=esdb://${EVENTSTORE_USER}:${EVENTSTORE_PASSWORD}@${EVENTSTORE_SERVER}:${EVENTSTORE_PORT}?tls=false&TlsVerifyCert=false
+      - EventBus__Provider=${EVENTBUS_PROVIDER}
+      - EventBus__ConnectionString=amqp://${EVENTBUS_USER}:${EVENTBUS_PASSWORD}@${EVENTBUS_SERVER}:${EVENTBUS_PORT}/
+      - DefaultRoles=Administrators;Users
+
+  shopfcomputerbackend.order.api:
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      - ConnectionStrings__Default=Server=${DATABASE_SERVER};Port=${DATABASE_PORT};User Id=${DATABASE_USER};Password=${DATABASE_PASSWORD};Database=ShopFComputerBackEnd.Order.Dev;
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - Jwt__ValidAudience=${JWT_VALIDAUDIENCE}
+      - Jwt__ValidIssuer=${JWT_VALIDISSUER}
+      - Jwt__Secret=${JWT_SECRET}
+      - Jwt__AccessTokenExpiresInHours=${JWT_ACCESSTOKENEXPIRESINHOURS}
+      - Jwt__RefreshTokenExpiresInHours=${JWT_REFRESHTOKENEXPIRESINHOURS}
+      - DistributedCache__Instance=${DISTRIBUTEDCACHE_INSTANCE}
+      - DistributedCache__Configuration=${DISTRIBUTEDCACHE_SERVER}:${DISTRIBUTEDCACHE_PORT},password=${DISTRIBUTEDCACHE_PASSWORD}
+      - EventStore__Provider=${EVENTSTORE_PROVIDER}
+      - EventStore__ConnectionString=esdb://${EVENTSTORE_USER}:${EVENTSTORE_PASSWORD}@${EVENTSTORE_SERVER}:${EVENTSTORE_PORT}?tls=false&TlsVerifyCert=false
+      - EventBus__Provider=${EVENTBUS_PROVIDER}
+      - EventBus__ConnectionString=amqp://${EVENTBUS_USER}:${EVENTBUS_PASSWORD}@${EVENTBUS_SERVER}:${EVENTBUS_PORT}/
+      - DefaultRoles=Administrators;Users
+
+  shopfcomputerbackend.cart.api:
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    environment:
+      - ConnectionStrings__Default=Server=${DATABASE_SERVER};Port=${DATABASE_PORT};User Id=${DATABASE_USER};Password=${DATABASE_PASSWORD};Database=ShopFComputerBackEnd.Cart.Dev;
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - Jwt__ValidAudience=${JWT_VALIDAUDIENCE}
+      - Jwt__ValidIssuer=${JWT_VALIDISSUER}
+      - Jwt__Secret=${JWT_SECRET}
+      - Jwt__AccessTokenExpiresInHours=${JWT_ACCESSTOKENEXPIRESINHOURS}
+      - Jwt__RefreshTokenExpiresInHours=${JWT_REFRESHTOKENEXPIRESINHOURS}
+      - DistributedCache__Instance=${DISTRIBUTEDCACHE_INSTANCE}
+      - DistributedCache__Configuration=${DISTRIBUTEDCACHE_SERVER}:${DISTRIBUTEDCACHE_PORT},password=${DISTRIBUTEDCACHE_PASSWORD}
+      - EventStore__Provider=${EVENTSTORE_PROVIDER}
+      - EventStore__ConnectionString=esdb://${EVENTSTORE_USER}:${EVENTSTORE_PASSWORD}@${EVENTSTORE_SERVER}:${EVENTSTORE_PORT}?tls=false&TlsVerifyCert=false
+      - EventBus__Provider=${EVENTBUS_PROVIDER}
+      - EventBus__ConnectionString=amqp://${EVENTBUS_USER}:${EVENTBUS_PASSWORD}@${EVENTBUS_SERVER}:${EVENTBUS_PORT}/
+      - DefaultRoles=Administrators;Users
+      - Services__Product__Endpoint=https://msa-product
+      - Services__Product__Http2UnencryptedSupport=true
+      - Services__Product__DangerousAcceptAnyServerCertificateValidator=true

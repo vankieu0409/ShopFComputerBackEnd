@@ -1,0 +1,66 @@
+version: '3.9'
+
+networks:
+  iot.network:
+    driver: bridge
+
+services:
+  shopfcomputerbackend.gateway.api:
+    image: shopfcomputerbackend.azurecr.io/shopfcomputerbackend/msa-gateway:prod
+    restart: always
+    ports:
+      - 44321:443
+    networks:
+      iot.network:
+        aliases:
+          - msa-gateway
+
+  shopfcomputerbackend.identity.api:
+    image: shopfcomputerbackend.azurecr.io/shopfcomputerbackend/msa-identity:prod
+    restart: always
+    networks:
+      iot.network:
+        aliases:
+          - msa-identity
+
+  shopfcomputerbackend.notification.api:
+    image: shopfcomputerbackend.azurecr.io/shopfcomputerbackend/msa-notification:prod
+    restart: always
+    networks:
+      iot.network:
+        aliases:
+          - msa-notification
+
+  shopfcomputerbackend.profile.api:
+    image: shopfcomputerbackend.azurecr.io/shopfcomputerbackend/msa-profile:prod
+    restart: always
+    networks:
+      iot.network:
+        aliases:
+          - msa-profile
+
+  shopfcomputerbackend.product.api:
+    image: shopfcomputerbackend.azurecr.io/shopfcomputerbackend/msa-product:prod
+    restart: always
+    networks:
+      iot.network:
+        aliases:
+          - msa-product
+
+  shopfcomputerbackend.order.api:
+    image: shopfcomputerbackend.azurecr.io/shopfcomputerbackend/msa-order:prod
+    restart: always
+    networks:
+      iot.network:
+        aliases:
+          - msa-order
+
+  shopfcomputerbackend.cart.api:
+    image: shopfcomputerbackend.azurecr.io/shopfcomputerbackend/msa-cart:prod
+    restart: always
+    networks:
+      iot.network:
+        aliases:
+          - msa-cart
+
+

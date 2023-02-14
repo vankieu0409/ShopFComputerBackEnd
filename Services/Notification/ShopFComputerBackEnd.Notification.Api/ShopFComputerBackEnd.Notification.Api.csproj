@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<UserSecretsId>e76dcd7f-eee5-4bf9-9aff-17a5d565c1da</UserSecretsId>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..\..</DockerfileContext>
+		<DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Grpc.AspNetCore" Version="2.49.0" />
+		<PackageReference Include="Grpc.AspNetCore.Web" Version="2.49.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.49.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Iot.Core.AspNetCore" Version="6.1.8" />
+		<PackageReference Include="Microsoft.AspNetCore.OData" Version="8.0.11" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Polly" Version="7.2.3" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.9">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Libraries\ShopFComputerBackEnd.Core.Authentication\ShopFComputerBackEnd.Core.Authentication.csproj" />
+		<ProjectReference Include="..\ShopFComputerBackEnd.Notification.Infrastructure\ShopFComputerBackEnd.Notification.Infrastructure.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="..\ShopFComputerBackEnd.Notification.Shared\Protos\NotificationTemplateGrpc.proto" GrpcService="Server" Generator="MSBuild:Compile" />
+		<Content Include="@(Protobuf)" />
+		<None Remove="@(Protobuf)" />
+	</ItemGroup>
+
+</Project>

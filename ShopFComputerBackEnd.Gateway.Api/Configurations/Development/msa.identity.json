@@ -1,0 +1,48 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "msa-identity",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/msa-identity/api/{everything}",
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "DelegatingHandlers": [
+        "HostInjectorDelegatingHandler"
+      ],
+      "SwaggerKey": "identity"
+    },
+    {
+      "DownstreamPathTemplate": "/odata/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "msa-identity",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/msa-identity/odata/{everything}",
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "DelegatingHandlers": [
+        "HostInjectorDelegatingHandler"
+      ],
+      "SwaggerKey": "identity"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "identity",
+      "Config": [
+        {
+          "Name": "Identity Service",
+          "Version": "v1",
+          "Url": "http://msa-identity/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}

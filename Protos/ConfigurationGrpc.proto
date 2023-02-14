@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+option csharp_namespace = "ShopFComputerBackEnd.Configuration.Grpc";
+
+package ConfigurationPackage;
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+service ConfigurationGrpc{
+	rpc GetConfigurationCollectionByContext (GetConfigurationCollectionByContextGrpcQuery) returns (GrpcResponseDto);
+	rpc Subscribe(Subscription) returns (stream TransferConfigurationGrpcDto);
+	rpc Unsubscribe(Subscription) returns (GrpcResponseDto);
+}
+
+message TransferConfigurationGrpcDto{
+	string Id = 1;
+	string Context = 2;
+	string Key = 3;
+	string Value = 4;
+	string Description = 5;
+	bool IsDeleted = 6; 
+}
+
+message ConfigurationCollectionGrpcDto{
+	repeated TransferConfigurationGrpcDto Value = 1;
+}
+
+message GetConfigurationCollectionByContextGrpcQuery{
+	string Context = 1;
+}
+
+message Subscription
+{
+	string Id = 1;
+}
+message Unsubscription
+{
+	string Id = 1;
+}
+
+message GrpcResponseDto{
+	bool IsSuccess = 1;
+	google.protobuf.StringValue Message = 2;
+	google.protobuf.Any Payload = 3;
+}

@@ -1,0 +1,79 @@
+version: '3.9'
+
+services:
+  shopfcomputerbackend.gateway.api:
+    build:
+      context: .
+      dockerfile: ShopFComputerBackEnd.Gateway.Api/Dockerfile
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  shopfcomputerbackend.identity.api:
+    build:
+      context: .
+      dockerfile: Services/Identity/ShopFComputerBackEnd.Identity.Api/Dockerfile
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  shopfcomputerbackend.notification.api:
+    build:
+      context: .
+      dockerfile: Services/Notification/ShopFComputerBackEnd.Notification.Api/Dockerfile
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  shopfcomputerbackend.profile.api:
+    build:
+      context: .
+      dockerfile: Services/Profile/ShopFComputerBackEnd.Profile.Api/Dockerfile
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  shopfcomputerbackend.product.api:
+    build:
+      context: .
+      dockerfile: Services/Product/ShopFComputerBackEnd.Product.Api/Dockerfile
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  shopfcomputerbackend.order.api:
+    build:
+      context: .
+      dockerfile: Services/Order/ShopFComputerBackEnd.Order.Api/Dockerfile
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+  shopfcomputerbackend.cart.api:
+    build:
+      context: .
+      dockerfile: Services/Cart/ShopFComputerBackEnd.Cart.Api/Dockerfile
+    ports:
+      - "80"
+      - "443"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro

@@ -1,0 +1,48 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "msa-profile",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/msa-profile/api/{everything}",
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "DelegatingHandlers": [
+        "HostInjectorDelegatingHandler"
+      ],
+      "SwaggerKey": "profile"
+    },
+    {
+      "DownstreamPathTemplate": "/odata/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "msa-profile",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/msa-profile/odata/{everything}",
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "DelegatingHandlers": [
+        "HostInjectorDelegatingHandler"
+      ],
+      "SwaggerKey": "profile"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "profile",
+      "Config": [
+        {
+          "Name": "Profile Service",
+          "Version": "v1",
+          "Url": "http://msa-profile/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}

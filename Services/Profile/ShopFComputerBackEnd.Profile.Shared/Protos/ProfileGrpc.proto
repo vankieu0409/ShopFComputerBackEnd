@@ -1,0 +1,84 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "ShopFComputerBackEnd.Profile.Grpc.Protos";
+
+package ProfilePackage;
+import "google/protobuf/wrappers.proto";
+
+service ProfileGrpcService{
+	rpc IsProfileExist (IsProfileExistGrpcQuery) returns (google.protobuf.BoolValue);
+	rpc GetProfileDetailById (GetProfileDetailByIdGrpcQuery) returns (ProfileDetailGrpcDto);
+	rpc CreateProfile(CreateProfileGrpcCommand) returns (google.protobuf.StringValue);
+	rpc IsProfileExisted (IsProfileExistGrpcQuery) returns (google.protobuf.StringValue);
+	rpc UpdateProfile(UpdateProfileGrpcCommand) returns (ProfileDetailGrpcDto);
+	rpc DeleteProfileCollectionByProfileIdCollection(DeleteProfileCollectionGrpcCommand) returns (ProfileDetailCollectionGrpcDto);
+}
+
+message IsProfileExistGrpcQuery{
+	google.protobuf.StringValue Id = 1;
+}
+
+message GetProfileDetailByIdGrpcQuery{
+	google.protobuf.StringValue Id = 1;
+}
+
+message GetProfileDetailCollectionByProfileIdCollectionGrpcQuery{
+	repeated string Value = 1;
+}
+
+message ProfileDetailCollectionGrpcDto{
+	repeated ProfileDetailGrpcDto Value = 1;
+}
+message ProfileDetailGrpcDto{
+	google.protobuf.StringValue Id = 1;
+	google.protobuf.StringValue DisplayName = 2;
+	AvatarGrpcDto Avatar = 5;
+	GendersType Gender = 7;
+	google.protobuf.StringValue PhoneNumber = 10;
+	google.protobuf.StringValue UserId = 11;
+	AddressGrpcDto Address = 14;
+}
+
+
+message AvatarGrpcDto{
+	google.protobuf.StringValue Url = 1;
+	google.protobuf.StringValue Thumbnail = 2;
+	google.protobuf.StringValue OriginalFileName = 3;
+	google.protobuf.Int64Value ContentLength = 4;
+	google.protobuf.StringValue AbsolutePath = 5;
+	google.protobuf.StringValue FileName = 6;
+	google.protobuf.StringValue Mime = 7;
+}
+message AddressGrpcDto{
+	google.protobuf.StringValue Number = 1;
+	google.protobuf.StringValue Street = 2;
+	google.protobuf.StringValue City = 3;
+	google.protobuf.StringValue Country = 4;
+}
+
+enum GendersType{
+	Male = 0;
+    Female = 1;
+    Other = 2;
+}
+
+message CreateProfileGrpcCommand{
+	google.protobuf.StringValue UserId=1;
+	google.protobuf.StringValue DisplayName = 2;
+	GendersType Gender = 3;
+	AvatarGrpcDto Avatar = 4;
+	AddressGrpcDto Address = 5;
+} 
+
+message UpdateProfileGrpcCommand{
+	google.protobuf.StringValue Id=1;
+	google.protobuf.StringValue DisplayName = 2;
+	GendersType Gender = 3;
+	AvatarGrpcDto Avatar = 4;
+	AddressGrpcDto Address = 5;
+}
+
+message DeleteProfileCollectionGrpcCommand{
+	repeated google.protobuf.StringValue Value = 1;
+	google.protobuf.StringValue DeletedBy = 2;
+}

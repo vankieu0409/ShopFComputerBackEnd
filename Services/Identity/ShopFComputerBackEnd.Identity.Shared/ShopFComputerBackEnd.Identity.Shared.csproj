@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Iot.Core.Shared" Version="6.0.0" />
+		<PackageReference Include="Iot.Core" Version="6.0.9" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Update="Protos\FunctionGrpc.proto">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+</Project>

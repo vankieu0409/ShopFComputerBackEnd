@@ -1,0 +1,48 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "msa-cart",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/msa-cart/api/{everything}",
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "DelegatingHandlers": [
+        "HostInjectorDelegatingHandler"
+      ],
+      "SwaggerKey": "cart"
+    },
+    {
+      "DownstreamPathTemplate": "/odata/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "msa-cart",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/msa-cart/odata/{everything}",
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "DelegatingHandlers": [
+        "HostInjectorDelegatingHandler"
+      ],
+      "SwaggerKey": "cart"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "cart",
+      "Config": [
+        {
+          "Name": "Cart Service",
+          "Version": "v1",
+          "Url": "http://msa-cart/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}

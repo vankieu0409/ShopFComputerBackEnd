@@ -1,0 +1,99 @@
+syntax = "proto3";
+
+option csharp_namespace = "ShopFComputerBackEnd.UserProfile.Grpc";
+
+package ProfilePackage;
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+
+service ProfileGrpc{
+	rpc GetPrimaryProfile (GetPrimaryProfileGrpcQuery) returns (GrpcResponseDto);
+	rpc GetProfile (GetProfileGrpcQuery) returns (GrpcResponseDto);
+	rpc GetProfiles (GetProfilesGrpcQuery) returns (GrpcResponseDto);
+}
+
+message GetPrimaryProfileGrpcQuery{
+	google.protobuf.StringValue UserId = 1;
+}
+
+message GetProfileGrpcQuery{
+	google.protobuf.StringValue Id = 1;
+}
+
+message GetProfilesGrpcQuery{
+	repeated google.protobuf.StringValue Ids = 1;
+}
+
+message ProfilesGrpcDto{
+	repeated ProfileGrpcDto Value = 1;
+}
+
+message ProfileGrpcDto{
+	google.protobuf.StringValue Id = 1;
+	google.protobuf.StringValue DisplayName = 2;
+	google.protobuf.StringValue LastName = 3;
+	google.protobuf.StringValue FirstName = 4;
+	google.protobuf.StringValue MiddleName = 5;
+	google.protobuf.StringValue Email = 6;
+	google.protobuf.StringValue PhoneNumber = 7;
+	google.protobuf.Timestamp Birthday = 8;
+	StorageGrpcDto Avatar = 9;
+	StorageGrpcDto Cover = 10;
+	IdentificationGrpcDto Identification = 11;
+	repeated AddressGrpcDto Addresses = 12;
+	bool IsPrimary = 13;
+	google.protobuf.StringValue UserId = 14;
+	repeated google.protobuf.StringValue Tenants = 15;
+}
+
+message StorageGrpcDto{
+	google.protobuf.StringValue Id = 1;
+	google.protobuf.StringValue AbsoluteUri = 2;
+	google.protobuf.StringValue RelativeUri = 3;
+	google.protobuf.StringValue AbsolutePath = 4;
+	google.protobuf.StringValue RelativePath = 5;
+	google.protobuf.StringValue FileName = 6;
+	google.protobuf.StringValue OriginalFileName = 7;
+	google.protobuf.Int64Value ContentLength = 8;
+	google.protobuf.StringValue ThumbnailPath = 9;
+	google.protobuf.StringValue ThumbnailUri = 10;
+	google.protobuf.StringValue Mime = 11;
+}
+
+message IdentificationGrpcDto{
+	google.protobuf.StringValue No = 1;
+	google.protobuf.Timestamp IssuedDate = 2;
+	google.protobuf.StringValue IssuedBy = 3;
+	IdentificationTypeGrpcDto Type = 4;
+	repeated IdentificationPhotoGrpcDto Photos = 5;
+}
+
+enum IdentificationTypeGrpcDto{
+	Identification = 0;
+	Passport = 1;
+	License = 2;
+	Certificate = 3;
+}
+
+message IdentificationPhotoGrpcDto{
+	google.protobuf.StringValue Title = 1;
+	StorageGrpcDto Photo = 2;
+}
+
+message AddressGrpcDto{
+	google.protobuf.StringValue Title = 1;
+	google.protobuf.StringValue Address = 2;
+	google.protobuf.StringValue City = 3;
+	google.protobuf.StringValue State = 4;
+	google.protobuf.StringValue PostalCode = 5;
+	google.protobuf.StringValue Country = 6;
+	google.protobuf.Int64Value Longitude = 7;
+	google.protobuf.Int64Value Latitude = 8;
+}
+
+message GrpcResponseDto{
+	bool IsSuccess = 1;
+	google.protobuf.StringValue Message = 2;
+	google.protobuf.Any Payload = 3;
+}

@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option csharp_namespace = "ShopFComputerBackEnd.Identity.Api.Protos";
+
+package IdentityPackage;
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/any.proto";
+
+service FunctionGrpcService{
+	rpc CreateFunctionCollection (TransferFunctionCollectionGrpcCommand) returns (FunctionCollectionGrpcDto);
+	rpc GetFunctionCollectionByServiceName (GetFunctionCollectionByServiceNameGrpcQuery) returns (FunctionCollectionGrpcDto);
+}
+
+message TransferFunctionGrpcCommand{
+	string ServiceName = 1;
+	string FunctionName = 2;
+}
+
+message TransferFunctionCollectionGrpcCommand{
+	repeated TransferFunctionGrpcCommand Value = 1;
+}
+
+message GetFunctionCollectionByServiceNameGrpcQuery{
+	string ServiceName = 1;
+}
+
+message FunctionGrpcDto{
+	string Id = 1;
+	string ServiceName = 2;
+	string FunctionName = 3;
+}
+
+message FunctionCollectionGrpcDto{
+	repeated FunctionGrpcDto Value = 1;
+}

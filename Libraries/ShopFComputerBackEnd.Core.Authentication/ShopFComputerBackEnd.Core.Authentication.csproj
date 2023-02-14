@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Grpc.Net.Client" Version="2.49.0" />
+		<PackageReference Include="Grpc.Net.Client.Web" Version="2.49.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="6.0.0" />
+		<PackageReference Include="Google.Protobuf" Version="3.21.7" />
+		<PackageReference Include="Grpc.Tools" Version="2.49.1">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+		<PackageReference Include="Iot.Core.EventBus" Version="6.0.9" />
+		<PackageReference Include="Polly" Version="7.2.3" />
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="@(Protobuf)" />
+		<None Remove="@(Protobuf)" />
+		<None Remove="appsettings.Development.json" />
+		<None Remove="appsettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ShopFComputerBackEnd.Core.Authentication.Shared\ShopFComputerBackEnd.Core.Authentication.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="@(Protobuf)" />
+		<None Remove="@(Protobuf)" />
+	</ItemGroup>
+
+</Project>

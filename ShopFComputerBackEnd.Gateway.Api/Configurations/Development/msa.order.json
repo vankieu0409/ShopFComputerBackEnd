@@ -1,0 +1,48 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "msa-order",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/msa-order/api/{everything}",
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "DelegatingHandlers": [
+        "HostInjectorDelegatingHandler"
+      ],
+      "SwaggerKey": "order"
+    },
+    {
+      "DownstreamPathTemplate": "/odata/{everything}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "msa-order",
+          "Port": 443
+        }
+      ],
+      "UpstreamPathTemplate": "/msa-order/odata/{everything}",
+      "DangerousAcceptAnyServerCertificateValidator": true,
+      "DelegatingHandlers": [
+        "HostInjectorDelegatingHandler"
+      ],
+      "SwaggerKey": "order"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "order",
+      "Config": [
+        {
+          "Name": "Order Service",
+          "Version": "v1",
+          "Url": "http://msa-order/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}

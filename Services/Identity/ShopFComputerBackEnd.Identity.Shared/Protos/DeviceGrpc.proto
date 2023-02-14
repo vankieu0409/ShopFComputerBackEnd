@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "ShopFComputerBackEnd.Identity.Api.Protos";
+
+package IdentityPackage;
+
+service DeviceGrpcService{
+	rpc GetDeviceTokenCollectionByUserIdCollection (GetDeviceTokenCollectionByUserIdCollectionGrpcQuery) returns (DeviceCollectionGrpcDto);
+}
+message GetDeviceTokenCollectionByUserIdCollectionGrpcQuery{
+	repeated string UserIdCollection = 1;
+}
+
+message DeviceCollectionGrpcDto{
+	repeated DeviceGrpcDto Value = 1;
+}
+
+message DeviceGrpcDto{
+	string UserId = 1;
+	string DeviceToken = 2;
+}

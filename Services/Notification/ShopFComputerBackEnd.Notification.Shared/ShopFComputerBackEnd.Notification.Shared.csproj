@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Iot.Core.Shared" Version="6.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ShopFComputerBackEnd.Notification.Domain\ShopFComputerBackEnd.Notification.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Update="Protos\NotificationTemplateGrpc.proto">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+</Project>
